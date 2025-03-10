@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!</title>
+  <style>
+    /* General Page Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+      color: white;
+      text-align: center;
+      padding: 50px;
+      margin: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      font-size: 3em;
+      animation: glow 1.5s infinite alternate;
+      margin-bottom: 20px;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px white; }
+      to { text-shadow: 0 0 20px #ffeb3b; }
+    }
+    p {
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+    /* Link Styles for Interaction */
+    .action-links a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 15px;
+      background: #ff4081;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .action-links a:hover {
+      background: #e91e63;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .modal-content {
+      background: #fff;
+      color: #333;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      position: relative;
+      text-align: center;
+      animation: modalFadeIn 0.5s;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: #aaa;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #000;
+    }
+    /* Interactive element styles */
+    .interactive-display {
+      font-size: 4em;
+      margin: 20px 0;
+    }
+    .blown {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+    button {
+      background: #ff4081;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #e91e63;
+    }
+    /* Special Message Fade-in */
+    .fade-message {
+      opacity: 0;
+    }
+    .fade-message.show {
+      animation: fadeIn 2s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Happy Birthday! 🎉</h1>
+    <p>Dear Nitya,</p>
+    <p>I hope your day is as amazing as you are. Enjoy these little surprises!</p>
+    <div class="action-links">
+      <a href="#" onclick="openModal('modal-blow'); return false;">Blow the Candles</a>
+      <a href="#" onclick="openModal('modal-cut'); return false;">Cut the Cake</a>
+      <a href="#" onclick="openModal('modal-message'); return false;">Special Message</a>
+    </div>
+  </div>
+
+  <!-- Modal for Blowing Candles -->
+  <div id="modal-blow" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal-blow')">&times;</span>
+      <h2>Blow the Candles!</h2>
+      <div id="candlesDisplay" class="interactive-display">🕯🕯🕯</div>
+      <button onclick="blowCandlesAction()">Blow!</button>
+    </div>
+  </div>
+
+  <!-- Modal for Cutting Cake -->
+  <div id="modal-cut" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal-cut')">&times;</span>
+      <h2>Cut the Cake!</h2>
+      <div id="cakeDisplay" class="interactive-display">🎂</div>
+      <button onclick="cutCakeAction()">Cut!</button>
+    </div>
+  </div>
+
+  <!-- Modal for Special Message -->
+  <div id="modal-message" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal-message')">&times;</span>
+      <h2>Special Message</h2>
+      <p id="specialMessage" class="fade-message" style="font-size:1.2em;">
+        You make the world brighter just by being in it! 😊💖. I hope you have a wonderful life ahead and also I wish you do well in your NEET exam. 
+        You have a special place in my heart and I am waiting for the day we meet💖💖.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Function to open a modal
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = "block";
+      if (modalId === 'modal-message') {
+        // Trigger the fade-in animation for the special message
+        setTimeout(() => {
+          document.getElementById("specialMessage").classList.add("show");
+        }, 100);
+      }
+    }
+    // Function to close a modal
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+      if (modalId === 'modal-message') {
+        document.getElementById("specialMessage").classList.remove("show");
+      }
+    }
+    // Function to animate blowing the candles
+    function blowCandlesAction() {
+      const display = document.getElementById("candlesDisplay");
+      display.innerHTML = "💨"; // Wind effect
+      setTimeout(() => {
+        display.innerHTML = "<span class='blown'>🕯🕯🕯</span>";
+      }, 1000);
+    }
+    // Function to animate cutting the cake
+    function cutCakeAction() {
+      const display = document.getElementById("cakeDisplay");
+      display.innerHTML = "🔪"; // Knife effect
+      setTimeout(() => {
+        display.innerHTML = "🍰";
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
